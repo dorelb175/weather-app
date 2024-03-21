@@ -1,22 +1,32 @@
-import { TemperatureMetric } from "../types/weatherApi";
+import { TDailyForecasts, TDailyForecast } from "../types/weatherApi";
 
-type DayForecastCardProps = {
-    day: string,
-    temperature: TemperatureMetric,
+const DailyForecastCard = ({ dailyForecast }: { dailyForecast: TDailyForecast }) => {
+    const { Minimum: minTemp, Maximum: maxTemp } = dailyForecast.Temperature;
+    const dateOfDay = new Date(dailyForecast.Date);
+    
+    return (
+        <div className="flex flex-col items-center space-y-2">
+            <span>{dateOfDay.toLocaleDateString()}</span>
+            <div>
+                <span>{minTemp.Value}° {minTemp.Unit}</span>
+                <span> - </span>
+                <span>{maxTemp.Value}° {maxTemp.Unit}</span>
+            </div>
+        </div>
+)};
+
+const WeatherForecast = ({ dailyForecasts }: { dailyForecasts: TDailyForecasts | null }) => {
+    if (!dailyForecasts) {
+        return null;
+    }
+
+    return (
+        <div className="flex justify-center mt-8 space-x-4">
+            {dailyForecasts.DailyForecasts.map((dailyForecast, idx) => (
+                <DailyForecastCard key={idx} dailyForecast={dailyForecast} />
+            ))}
+        </div>
+    );
 };
-
-const WeatherDayForecastCard = ({ day, temperature }: DayForecastCardProps) => (
-    <div className="flex flex-col items-center space-y-1">
-        <span className="uppercase">{day}</span>
-        <span>{temperature.Value}° {temperature.Unit}</span>
-    </div>
-);
-
-const WeatherForecast = () => (
-    <div className="flex justify-around mt-8 space-x-4 dark:text-gray-400">
-        <WeatherDayForecastCard day={"SUN"} temperature={{ Value: 20, Unit: "C", UnitType: 1}} />
-        <WeatherDayForecastCard day={"SUN"} temperature={{ Value: 20, Unit: "C", UnitType: 1}} />
-    </div>
-);
 
 export default WeatherForecast;

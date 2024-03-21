@@ -6,13 +6,15 @@ import Favorites from './pages/Favorites';
 function App() {
 
   return (
-    <>
+    <div className='min-h-screen bg-gradient-to-b from-indigo-700 from-10%'>
       <NavBar />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/favorites' element={<Favorites />}></Route>
-      </Routes>
-    </>
+      <div>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/favorites' element={<Favorites />}></Route>
+        </Routes>
+      </div>
+    </div>
   )
 }
 
