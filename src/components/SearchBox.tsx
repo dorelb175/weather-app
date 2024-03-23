@@ -22,9 +22,11 @@ const SearchBox = ({ onSearchClicked }: Props) => {
                 value={searchText} 
                 onChange={e => onSearchChange(e.target.value)} 
             />
-            <button onClick={() => onSearchClicked(searchText)} className="px-4 rounded-full disabled:opacity-50 transition text-base bg-black text-white py-1.5 h-[38px] -mr-3" >
-                Search
-            </button>
+            <button
+                className="px-4 rounded-full disabled:opacity-50 transition text-base bg-black text-white py-1.5 h-[38px] -mr-3"
+                onClick={() => onSearchClicked(searchText)}
+                disabled={searchText.length === 0}
+            >Search</button>
         </div>
     );
 };

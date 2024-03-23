@@ -5,6 +5,7 @@ import { DEFAULT_LOCATION, TLocation } from '../types/location';
 import WeatherForecast from '../components/WeatherForecast';
 import { TCurrentConditions, TDailyForecasts } from '../types/weatherApi';
 import { getAutoCompleteLocations, getCurrentWeatherConditions, getFivedaysForecast } from '../api/weatherApi';
+import toast from 'react-hot-toast';
 
 const Home = () => {
   const [currentLocation, setCurrentLocation] = useState<TLocation>(DEFAULT_LOCATION);
@@ -12,8 +13,8 @@ const Home = () => {
   const [locationForecast, setLocationForecast] = useState<TDailyForecasts | null>(null);
 
   useEffect(() => {
-    getCurrentWeatherConditions(currentLocation.id).then(setCurrentConditions);
-    getFivedaysForecast(currentLocation.id).then(setLocationForecast);
+    getCurrentWeatherConditions(currentLocation.id).then(setCurrentConditions).catch(() => toast.error("Could not get recent weather conditions"));
+    getFivedaysForecast(currentLocation.id).then(setLocationForecast).catch(() => toast.error("Could not get recent weather forecast"));
   }, [currentLocation]);
 
   const onSearchClicked = (searchText: string) => {
@@ -25,7 +26,7 @@ const Home = () => {
         };
         setCurrentLocation(location);
       } else {
-        // show toast error
+        toast.error("No locations found");
       }
     }).catch(err => console.error(err));
   }
