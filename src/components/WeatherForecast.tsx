@@ -1,16 +1,22 @@
 import { TDailyForecasts, TDailyForecast } from "../types/weatherApi";
+import WeatherIcon from "./WeatherIcon";
 
 const DailyForecastCard = ({ dailyForecast }: { dailyForecast: TDailyForecast }) => {
     const { Minimum: minTemp, Maximum: maxTemp } = dailyForecast.Temperature;
+    const { Day: dayWeatherSummary, Night: nightWeatherSummary } = dailyForecast;
     const dateOfDay = new Date(dailyForecast.Date);
     
     return (
-        <div className="flex flex-col items-center space-y-2">
+        <div className="w-auto px-2 flex flex-col items-center space-y-5 bg-violet-400 shadow-2xl shadow-slate-700 rounded-xl font-semibold">
             <span>{dateOfDay.toLocaleDateString()}</span>
             <div>
                 <span>{minTemp.Value}° {minTemp.Unit}</span>
-                <span> - </span>
+                <span> / </span>
                 <span>{maxTemp.Value}° {maxTemp.Unit}</span>
+            </div>
+            <div> 
+                <WeatherIcon iconNumber={dayWeatherSummary.Icon} />
+                <WeatherIcon iconNumber={nightWeatherSummary.Icon} />
             </div>
         </div>
 )};
@@ -21,7 +27,7 @@ const WeatherForecast = ({ dailyForecasts }: { dailyForecasts?: TDailyForecasts 
     }
 
     return (
-        <div className="flex justify-center mt-8 space-x-4">
+        <div className="flex justify-center mt-8 space-x-5 cursor-default">
             {dailyForecasts.DailyForecasts.map((dailyForecast, idx) => (
                 <DailyForecastCard key={idx} dailyForecast={dailyForecast} />
             ))}

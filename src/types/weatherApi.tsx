@@ -6,11 +6,16 @@ export type TemperatureMetric = {
 
 export type TCurrentConditions = {
   WeatherText: string,
-  // WeatherIcon: number,
+  WeatherIcon: number,
   Temperature: {
       Metric: TemperatureMetric,
       Imperial: TemperatureMetric,
   },
+};
+
+type TDailyForecastSummary = {
+  Icon: number,
+  IconPhrase: string,
 };
 
 export type TDailyForecast = {
@@ -20,25 +25,11 @@ export type TDailyForecast = {
     Minimum: TemperatureMetric,
     Maximum: TemperatureMetric
   },
-  // Day: {
-  //   "Icon": 3,
-  //   "IconPhrase": "Partly sunny",
-  //   "HasPrecipitation": false
-  // },
-  // Night: {
-  //   "Icon": 33,
-  //   "IconPhrase": "Clear",
-  //   "HasPrecipitation": false
-  // },
+  Day: TDailyForecastSummary,
+  Night: TDailyForecastSummary,
 };
 
 export type TDailyForecasts = {
-  // Headline: {
-  //   EffectiveDate: string,
-  //   EffectiveEpochDate: number,
-  //   EndDate: string,
-  //   EndEpochDate: number,
-  // },
   DailyForecasts: TDailyForecast[]
 };
 
