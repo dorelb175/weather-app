@@ -15,7 +15,7 @@ const DailyForecastCard = ({ dailyForecast }: { dailyForecast: TDailyForecast })
         </div>
 )};
 
-const WeatherForecast = ({ dailyForecasts }: { dailyForecasts: TDailyForecasts | null }) => {
+const WeatherForecast = ({ dailyForecasts }: { dailyForecasts?: TDailyForecasts | null }) => {
     if (!dailyForecasts) {
         return null;
     }

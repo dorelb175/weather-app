@@ -1,20 +1,18 @@
 export type TemperatureMetric = {
-    Value: number,
-    Unit: string,
-    UnitType: number
+  Value: number,
+  Unit: string,
+  UnitType: number
 };
 
-// getCurrentConditions
 export type TCurrentConditions = {
-    WeatherText: string,
-    // WeatherIcon: number,
-    Temperature: {
-        Metric: TemperatureMetric,
-        Imperial: TemperatureMetric,
-    },
+  WeatherText: string,
+  // WeatherIcon: number,
+  Temperature: {
+      Metric: TemperatureMetric,
+      Imperial: TemperatureMetric,
+  },
 };
 
-// forecast
 export type TDailyForecast = {
   Date: string,
   EpochDate: number,
@@ -45,20 +43,19 @@ export type TDailyForecasts = {
 };
 
 
-// Auto complete location
 export type TAutoCompleteLocationResult = {
-    Version: number,
-    Key: string,
-    Type: string,
-    Rank: number,
-    LocalizedName: string,
-    Country: {
-      ID: string,
-      LocalizedName: string
-    },
-    AdministrativeArea: {
-      ID: string,
-      LocalizedName: string
-    }
+  Version: number,
+  Key: string,
+  Type: string,
+  Rank: number,
+  LocalizedName: string,
+  Country: {
+    ID: string,
+    LocalizedName: string
+  },
+  AdministrativeArea: {
+    ID: string,
+    LocalizedName: string
+  }
 };
 export type TAutoCompleteLocation = TAutoCompleteLocationResult[];

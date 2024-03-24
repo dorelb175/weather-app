@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TLocation } from '../../types/location';
 
 type FavoritesState = {
-    favoriteLocations: TLocation[];
+  favoriteLocations: { [key: number]: TLocation };
 }
 const initialState: FavoritesState = {
-    favoriteLocations: []
+  favoriteLocations: {}
 };
 
 export const favoritesSlice = createSlice({
@@ -13,10 +13,14 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addToFavorites: (state, action: PayloadAction<TLocation>) => {
-      state.favoriteLocations.push(action.payload);
+      if (!state.favoriteLocations[action.payload.id]) {
+        state.favoriteLocations[action.payload.id] = action.payload;
+      }
     },
     removeFromFavorites: (state, action: PayloadAction<TLocation>) => {
-      state.favoriteLocations = state.favoriteLocations.filter(loc => loc.id !== action.payload.id);
+      if (state.favoriteLocations[action.payload.id]) {
+        delete state.favoriteLocations[action.payload.id];
+      }
     }
   },
 })
