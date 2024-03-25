@@ -57,22 +57,15 @@ export const MOCK_FORECAST_TA = {
         "Day": {
           "Icon": 13,
           "IconPhrase": "Mostly cloudy w/ showers",
-          "HasPrecipitation": true,
           "PrecipitationType": "Rain",
           "PrecipitationIntensity": "Moderate"
         },
         "Night": {
           "Icon": 39,
           "IconPhrase": "Partly cloudy w/ showers",
-          "HasPrecipitation": true,
           "PrecipitationType": "Rain",
           "PrecipitationIntensity": "Light"
         },
-        "Sources": [
-          "AccuWeather"
-        ],
-        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&unit=c&lang=en-us",
-        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&unit=c&lang=en-us"
       },
       {
         "Date": "2024-03-22T07:00:00+02:00",
@@ -92,18 +85,11 @@ export const MOCK_FORECAST_TA = {
         "Day": {
           "Icon": 3,
           "IconPhrase": "Partly sunny",
-          "HasPrecipitation": false
         },
         "Night": {
           "Icon": 35,
           "IconPhrase": "Partly cloudy",
-          "HasPrecipitation": false
         },
-        "Sources": [
-          "AccuWeather"
-        ],
-        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&unit=c&lang=en-us",
-        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&unit=c&lang=en-us"
       },
       {
         "Date": "2024-03-23T07:00:00+02:00",
@@ -123,18 +109,11 @@ export const MOCK_FORECAST_TA = {
         "Day": {
           "Icon": 4,
           "IconPhrase": "Intermittent clouds",
-          "HasPrecipitation": false
         },
         "Night": {
           "Icon": 38,
           "IconPhrase": "Mostly cloudy",
-          "HasPrecipitation": false
         },
-        "Sources": [
-          "AccuWeather"
-        ],
-        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&unit=c&lang=en-us",
-        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&unit=c&lang=en-us"
       },
       {
         "Date": "2024-03-24T07:00:00+02:00",
@@ -154,18 +133,11 @@ export const MOCK_FORECAST_TA = {
         "Day": {
           "Icon": 4,
           "IconPhrase": "Intermittent clouds",
-          "HasPrecipitation": false
         },
         "Night": {
           "Icon": 35,
           "IconPhrase": "Partly cloudy",
-          "HasPrecipitation": false
         },
-        "Sources": [
-          "AccuWeather"
-        ],
-        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&unit=c&lang=en-us",
-        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&unit=c&lang=en-us"
       },
       {
         "Date": "2024-03-25T07:00:00+02:00",
@@ -185,18 +157,11 @@ export const MOCK_FORECAST_TA = {
         "Day": {
           "Icon": 2,
           "IconPhrase": "Mostly sunny",
-          "HasPrecipitation": false
         },
         "Night": {
           "Icon": 34,
           "IconPhrase": "Mostly clear",
-          "HasPrecipitation": false
         },
-        "Sources": [
-          "AccuWeather"
-        ],
-        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&unit=c&lang=en-us",
-        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&unit=c&lang=en-us"
       }
     ]
   } as TDailyForecasts;
@@ -232,18 +197,11 @@ export const MOCK_FORECAST_NY = {
       "Day": {
         "Icon": 1,
         "IconPhrase": "Sunny",
-        "HasPrecipitation": false
       },
       "Night": {
         "Icon": 33,
         "IconPhrase": "Clear",
-        "HasPrecipitation": false
       },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?lang=en-us",
-      "Link": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?lang=en-us"
     },
     {
       "Date": "2024-03-22T07:00:00+02:00",
@@ -263,18 +221,11 @@ export const MOCK_FORECAST_NY = {
       "Day": {
         "Icon": 1,
         "IconPhrase": "Sunny",
-        "HasPrecipitation": false
       },
       "Night": {
         "Icon": 34,
         "IconPhrase": "Mostly clear",
-        "HasPrecipitation": false
       },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=1&lang=en-us",
-      "Link": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=1&lang=en-us"
     },
     {
       "Date": "2024-03-23T07:00:00+02:00",
@@ -294,18 +245,11 @@ export const MOCK_FORECAST_NY = {
       "Day": {
         "Icon": 2,
         "IconPhrase": "Mostly sunny",
-        "HasPrecipitation": false
       },
       "Night": {
         "Icon": 33,
         "IconPhrase": "Clear",
-        "HasPrecipitation": false
       },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=2&lang=en-us",
-      "Link": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=2&lang=en-us"
     },
     {
       "Date": "2024-03-24T07:00:00+02:00",
@@ -325,18 +269,11 @@ export const MOCK_FORECAST_NY = {
       "Day": {
         "Icon": 1,
         "IconPhrase": "Sunny",
-        "HasPrecipitation": false
       },
       "Night": {
         "Icon": 34,
         "IconPhrase": "Mostly clear",
-        "HasPrecipitation": false
       },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=3&lang=en-us",
-      "Link": "http://www.accuweather.com/en/au/aberfoyle-park/3497031/daily-weather-forecast/3497031?day=3&lang=en-us"
     },
   ]
 } as TDailyForecasts;

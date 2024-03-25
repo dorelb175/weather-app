@@ -15,10 +15,23 @@ const FavoriteLocationCard = ({ location }: { location: TLocation }) => {
         navigate('/');
     }
 
+    const { name, currentWeatherConditions } = location;
+
     return (
-        <li className="text-xl text-slate-300 py-2">
-            <button className="px-2 rounded-full bg-slate-500 text-white mr-2" onClick={() => dispatch(removeFromFavorites(location))}>Remove</button>
-            <button onClick={navigateHomeWithLocation}>{location.name}</button>
+        <li className="flex justify-start text-xl text-slate-300 py-4">
+            <button className="rounded-full bg-slate-400 text-white text-base px-3 mr-3" onClick={() => dispatch(removeFromFavorites(location))}>Unsave</button>
+            <button onClick={navigateHomeWithLocation} className="text-black">
+                <span className="font-bold"> {name} </span>
+                {currentWeatherConditions && (
+                    <div className="font-thin">
+                        <span> {currentWeatherConditions.WeatherText} </span>
+                        <span>
+                            {currentWeatherConditions.Temperature.Metric.Value}° 
+                            {currentWeatherConditions.Temperature.Metric.Unit}
+                        </span>
+                    </div>
+                )}
+            </button>
         </li>);
 }
 
@@ -29,7 +42,7 @@ const mapStateToProps = (state: RootState) => {
 
 const FavoriteLocations = ({ favoriteLocations }: { favoriteLocations: TLocation[] }) => {
     return (
-        <div className='max-w-md p-8 mx-auto'>
+        <div className='max-w-xl p-8 mx-auto'>
             <h1 className="text-4xl text-slate-300 pb-4">Saved Locations</h1>
             <ul>
                 {favoriteLocations.map(location => <FavoriteLocationCard key={location.id} location={location} />)}

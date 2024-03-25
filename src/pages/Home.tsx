@@ -4,12 +4,17 @@ import { TLocation } from '../types/location';
 import WeatherForecast from '../components/WeatherForecast';
 import { getAutoCompleteLocations, getCurrentWeatherConditions, getFivedaysForecast } from '../api/weatherApi';
 import toast from 'react-hot-toast';
-// import { useQuery } from 'react-query';
 import { RootState } from '../state/store';
 import { connect, useDispatch } from 'react-redux';
-import { setCurrentLocation } from '../state/slices/location';
+import { setCurrentLocation, setCurrentWeatherConditions } from '../state/slices/location';
 import { useEffect, useState } from 'react';
-import { TCurrentConditions, TDailyForecasts } from '../types/weatherApi';
+import { TDailyForecasts } from '../types/weatherApi';
+
+
+const TOAST_ERROR_IDS = {
+  CURRENT_CONTIDIONS: "fetchConditionsError",
+  FORECAST: "fetchForecastError"
+};
 
 const mapStateToProps = (state: RootState) => {
   const { location, favorites } = state;
@@ -20,25 +25,23 @@ const mapStateToProps = (state: RootState) => {
 }
 
 const HomeComponent = ({ currentLocation, isLocationFavorited }: { currentLocation: TLocation, isLocationFavorited: boolean }) => {
-  const [currentConditions, setCurrentConditions] = useState<TCurrentConditions | null>(null);
   const [locationForecast, setLocationForecast] = useState<TDailyForecasts | null>(null);
   const dispatch = useDispatch();
+  const { id: currentLocId, currentWeatherConditions } = currentLocation;
 
   useEffect(() => {
-    getCurrentWeatherConditions(currentLocation.id)
-      .then(setCurrentConditions)
-      .catch(() => toast.error("Could not get recent weather conditions", { id: "fetchConditionsError" }))
+    getCurrentWeatherConditions(currentLocId)
+      .then(currentConditions => dispatch(setCurrentWeatherConditions(currentConditions)))
+      .catch(() => toast.error("Could not get recent weather conditions", { id: TOAST_ERROR_IDS.CURRENT_CONTIDIONS }))
 
-    getFivedaysForecast(currentLocation.id)
+    getFivedaysForecast(currentLocId)
       .then(setLocationForecast)
-      .catch(() => toast.error("Could not get recent weather forecast", { id: "fetchForecastError" }))
-  }, [currentLocation.id]);
+      .catch(() => toast.error("Could not get recent weather forecast", { id: TOAST_ERROR_IDS.FORECAST }))
+  }, [currentLocId, dispatch]);
   
   const setCurrentLocationIfNeeded = (location: TLocation) => {
-    if (location.id !== currentLocation.id) {
+    if (location.id !== currentLocId) {
       dispatch(setCurrentLocation(location));
-    } else {
-      console.log("no need change")
     }
   }
 
@@ -47,7 +50,8 @@ const HomeComponent = ({ currentLocation, isLocationFavorited }: { currentLocati
       if (optionalLocations && optionalLocations.length > 0) {
         const location: TLocation = {
           id: parseInt(optionalLocations[0].Key),
-          name: optionalLocations[0].LocalizedName
+          name: optionalLocations[0].LocalizedName,
+          currentWeatherConditions,
         };
         setCurrentLocationIfNeeded(location);
       } else {
@@ -59,7 +63,7 @@ const HomeComponent = ({ currentLocation, isLocationFavorited }: { currentLocati
   return (
     <div className='flex flex-col'>
       <SearchBox onSearchClicked={onSearchClicked} />
-      <CurrentWeatherWidget currentLocation={currentLocation} isFavorite={isLocationFavorited} currentConditions={currentConditions} />
+      <CurrentWeatherWidget currentLocation={currentLocation} isFavorite={isLocationFavorited} currentConditions={currentWeatherConditions} />
       <WeatherForecast dailyForecasts={locationForecast} />
     </div>
   )
