@@ -1,6 +1,6 @@
 import { TAutoCompleteLocation, TCurrentConditions, TDailyForecasts } from "../types/weatherApi";
 
-const BASE_API_URL = 'http://dataservice.accuweather.com';
+const BASE_API_URL = 'https://dataservice.accuweather.com';
 const API_KEY = import.meta.env.VITE_ACCUWEATHER_API_KEY;
 
 export const getCurrentWeatherConditions = async (location: number) => {
