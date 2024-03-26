@@ -12,7 +12,7 @@ const FavoriteLocationCard = ({ location }: { location: TLocation }) => {
     
     const navigateHomeWithLocation = () => {
         dispatch(setCurrentLocation(location));
-        navigate('/');
+        navigate('/weather-app/');
     }
 
     const { name, currentWeatherConditions } = location;
