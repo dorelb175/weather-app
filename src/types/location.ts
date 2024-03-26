@@ -5,3 +5,9 @@ export type TLocation = {
     name: string,
     currentWeatherConditions?: TCurrentConditions | null
 }
+
+export type TSuggestedLocation = {
+    value: number,
+    label: string,
+    localizedName: string,
+};

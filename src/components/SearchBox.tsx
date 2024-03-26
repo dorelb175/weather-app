@@ -1,33 +1,59 @@
 import { useState } from "react";
+import AsyncSelect from "react-select/async";
+import { getAutoCompleteLocations } from "../api/weatherApi";
+import { TSuggestedLocation } from "../types/location";
+
+const getOptionalLocations = async (inputValue: string): Promise<TSuggestedLocation[]> => {
+    try {
+        const TSuggestedLocations = await getAutoCompleteLocations(inputValue);
+        if (!TSuggestedLocations) {
+            return [];
+        }
+
+        return TSuggestedLocations.map(TSuggestedLocation => ({
+            value: parseInt(TSuggestedLocation.Key),
+            localizedName: TSuggestedLocation.LocalizedName,
+            label: `${TSuggestedLocation.LocalizedName}, ${TSuggestedLocation.Country.LocalizedName}`
+        })) as TSuggestedLocation[];
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
+}
 
 type Props = {
-    onSearchClicked: (searchText: string) => void;
+    onLocationSelected: (selectedLocation: TSuggestedLocation) => void;
 };
 
-const SearchBox = ({ onSearchClicked }: Props) => {
+const SearchBox = ({ onLocationSelected }: Props) => {
     const [searchText, setSearchText] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState<TSuggestedLocation | null>(null);
 
-    const onSearchChange = (text: string) => {
-        if (/^[a-zA-Z\s]*$/.test(text)) {
-            setSearchText(text);
+    const onSelectChange = (selectedLocation: TSuggestedLocation | null) => {
+        if (selectedLocation) {
+            setSelectedLocation(selectedLocation);
+            onLocationSelected(selectedLocation);
         }
     }
+
+    const onInputChange = (text: string) => {
+        if (!/^[a-zA-Z\s]*$/.test(text)) {
+            return;
+        }
+        setSearchText(text);
+    };
     
     return (
-        <div className="shadow-2xl mt-10 mx-auto max-w-xl py-2 px-6 rounded-full bg-gray-50 border flex focus-within:border-gray-300">
-            <input 
-                className="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0"
-                type="text" 
-                placeholder="Search for a city..." 
-                value={searchText} 
-                onChange={e => onSearchChange(e.target.value)} 
-            />
-            <button
-                className="px-4 rounded-full disabled:opacity-50 transition text-base bg-black text-white py-1.5 h-[38px] -mr-3"
-                onClick={() => onSearchClicked(searchText)}
-                disabled={searchText.length === 0}
-            >Search</button>
-        </div>
+        <AsyncSelect
+            className="w-3xl mt-4 mx-96"
+            placeholder="Search for a city..."
+            inputValue={searchText}
+            value={selectedLocation}
+            cacheOptions
+            onInputChange={onInputChange}
+            onChange={onSelectChange}
+            loadOptions={getOptionalLocations}
+        />
     );
 };
 
