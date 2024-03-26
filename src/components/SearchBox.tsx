@@ -5,15 +5,15 @@ import { TSuggestedLocation } from "../types/location";
 
 const getOptionalLocations = async (inputValue: string): Promise<TSuggestedLocation[]> => {
     try {
-        const TSuggestedLocations = await getAutoCompleteLocations(inputValue);
-        if (!TSuggestedLocations) {
+        const suggestedLocations = await getAutoCompleteLocations(inputValue);
+        if (!suggestedLocations) {
             return [];
         }
 
-        return TSuggestedLocations.map(TSuggestedLocation => ({
-            value: parseInt(TSuggestedLocation.Key),
-            localizedName: TSuggestedLocation.LocalizedName,
-            label: `${TSuggestedLocation.LocalizedName}, ${TSuggestedLocation.Country.LocalizedName}`
+        return suggestedLocations.map(suggestedLocation => ({
+            value: parseInt(suggestedLocation.Key),
+            localizedName: suggestedLocation.LocalizedName,
+            label: `${suggestedLocation.LocalizedName}, ${suggestedLocation.Country.LocalizedName}`
         })) as TSuggestedLocation[];
     } catch (err) {
         console.error(err);

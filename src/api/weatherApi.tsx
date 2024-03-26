@@ -35,7 +35,6 @@ export const getFivedaysForecast = async (location: number) => {
     try {
         const apiRes = await fetch(url).then(res => res.json());
         const currWeatherForecast = await apiRes as TDailyForecasts;
-        console.log(currWeatherForecast);
         return currWeatherForecast;
     } catch (err) {
         console.error(`Error in getFivedaysForecast with location=${location}: ${err}`);
